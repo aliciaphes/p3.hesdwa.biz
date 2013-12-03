@@ -1,5 +1,10 @@
 body{
-	background-image: url('img/plane.jpg');
+	background-image: url('../img/plane.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
+	color: white;
+}
+
+#dpReturn, #dpWay{
+	display: none;	
 }

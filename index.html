@@ -1,18 +1,37 @@
     <!DOCTYPE html>
     <html>
     <head>
-      <title>alipe</title>
+      <title>Let's travel!</title>
 
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 
+      <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
       <link rel="stylesheet" href="css/mycss.css">
 
     </head>
     
     <body>	
 
+      <div id="returnTrip" class="span5 offset6" style="border: 3px solid white; padding: 10px;">
+        <input type="radio" name="travelType" id="radioReturn">Return trip<br>
+        <input type="radio" name="travelType" id="radioOne">One way<br />
+
+        <input type="text" id="dpReturn">
+        <input type="text" id="dpWay">
 
 
+        <br />
+        <button id="prev">Prev</button>
+        <button id="next">Next</button>
 
+      </div>
+
+
+      <!-- Use jquery and jquery UI to apply effects   -->
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+      <script src="js/trip.js"></script>
+      <script src="js/effects.js"></script>
     </body>
     </html>
