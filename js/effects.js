@@ -3,9 +3,33 @@ $( document ).ready(function() {
 	var myTrip = new trip();
 
 
-	var initialize = function(){
+
+
+	var showStep = function(index){
+
+		console.log("alipe step="+index);
+
+		//show current step and hide the rest:
+		$("#step"+index).show().append("<button id='prev"+index+"'>Prev</button><button id='next"+index+"'>Next</button>");
+
+		var n = myTrip.stepTitles.length;
+		for(var i=0; i < n; i++){
+			if(i != index)
+				$("#step"+i).hide();
+			if(i == 0) //if first step, hide 'prev' button
+				$("#prev"+i).hide();
+			if(i == n-1) //if last step, hide 'next' button
+				$("#next"+i).hide();
+		}
 
 	};
+
+
+
+	showStep(myTrip.getStep()); //first call to initialize
+
+
+
 
 //Actions to perform when clicking on 'Return trip'
 $('#radioReturn').click(function() {
@@ -18,7 +42,7 @@ $('#radioReturn').click(function() {
 
 			myTrip.setBegin(dateObject);
 			var d = myTrip.getBegin().getDate();
-			console.log(d);        
+			console.log(d);
 		}
 
 	});
@@ -44,16 +68,18 @@ $('#radioOne').click(function() {
 
 
 //Actions to perform when clicking on 'Next'
-$('#next').click(function() {
+$('#next'+myTrip.getStep()).click(function() {
 
-	console.log(myTrip.getStep());
+	myTrip.nextStep();
+	showStep(myTrip.getStep());
+
 });
 
 
 
 $('#name').autocomplete({
 
-	source: function( request, response ) {
+	source: function(request, response) {
 
 		$.ajax({
 			dataType: "JSON",
@@ -62,11 +88,11 @@ $('#name').autocomplete({
 			// 	name: $('#name').val(),
 			// },
 			minLength: 3,
-			success: function(response){
-				console.log(request.term);
+			success: function(results){
+				//console.log(request.term);
 				//filter:
 				var items = [];
-				$.each(response, function (index, value) {
+				$.each(results, function (index, value) {
 			        //console.log(value);
 			        //if(value.type == "airport" && status == 1){ //1=open airport
 			        	if(value.type == "Airports"
@@ -74,19 +100,22 @@ $('#name').autocomplete({
 			        		items.push(value.name);
 			        }    
 			    });//end each
+				
 				console.log(items);
 
-response(response);
-
-		// var results = $.map(items, function(item){
-		// return { 
-		// 	value: item.value, id: item.id }
-		// });
+				//response(results);
+				//response(items); //este tira mas o menos
 
 
+				response( $.map( items, function( item ) {
+					return {
+						label: item.name,
+						value: item.name
+					}
+				}));
 
 
-			//return items;
+
 
 			}//end of success
 

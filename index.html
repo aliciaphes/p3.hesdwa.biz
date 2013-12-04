@@ -12,56 +12,75 @@
     </head>
     
     <body>	
-      Thanks to [Airports2.json]
-      <div id="step1" class="span5 offset6 tripbox">
-
-        <header id="headerTitle">
-          <h3>Step title</h3>
-        </header>
-
-        <label for="radioReturn">Return trip
-          <input type="radio" name="travelType" id="radioReturn"></label>
-
-          <label for="radioOne">One way
-            <input type="radio" name="travelType" id="radioOne"></label><br />
 
 
-            <br />
-            <input type="text" id="dpOneWay" required><br />
-            <input type="text" id="dpReturn" required>
+      <div class="container-fluid">
 
-            <br />
-            <button id="prev">Prev</button>
-            <button id="next">Next</button>
+        <div class="row-fluid">
+
+          Thanks to [Airports2.json] 
+
+          <div id="step0" class="span5 offset5 tripbox">
+
+            <header id="headerTitle">
+              <h3>Step title</h3>
+            </header>
+
+            <label for="radioReturn">Return trip
+              <input type="radio" name="travelType" id="radioReturn"></label>
+
+              <label for="radioOne">One way
+                <input type="radio" name="travelType" id="radioOne"></label><br />
 
 
-            <div id="airports">
+                <br />
+                <input type="text" id="dpOneWay" required><br />
+                <input type="text" id="dpReturn" required>
+
+                <br />
+
+                <div id="airports">
 
 
-              <!-- <input type='text' id='name'> -->
-              <input id='name'>
+                  <!-- <input type='text' id='name'> -->
+                  <input id='name'>
 
-              <!-- <button id="search">Search</button> -->
-              <div id="results">
+                  <!-- <button id="search">Search</button> -->
+                  <div id="results">
 
+                  </div>
+                </div>
+
+                <!-- <button id="prev">Prev</button> -->
+                <!-- <button id="next">Next</button> -->
+
+
+              </div>
+
+            </div>
+
+
+            <div class="row-fluid">
+              <div id="step1" class="span5 offset5 tripbox">
+                <header>
+              <h3>Step1</h3>
+            </header>
+              </div>
+            </div>
+
+
+            <div class="row-fluid">
+              <div id="step2" class="span5 offset5 tripbox">
+                step2
               </div>
             </div>
 
 
 
-          </div>
-
-
-
-          <div id="step2" class="span5 offset6 tripbox">
 
 
 
           </div>
-
-
-
-
 
 
 

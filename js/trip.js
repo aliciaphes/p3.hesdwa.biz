@@ -1,6 +1,7 @@
 function trip(){
 	
-	this.step = 1;
+	this.step = 0;
+	this.stepTitles = ["Select dates", "Passengers", "Extras", "Summary"];
 
 
 
