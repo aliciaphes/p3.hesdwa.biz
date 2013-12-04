@@ -2,9 +2,37 @@ body{
 	background-image: url('../img/plane.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
+	font-family: Helvetica, sans-serif;
 	color: white;
 }
 
-#dpReturn, #dpWay{
-	display: none;	
+#dpReturn, #dpOneWay, #prev{
+	display: none;
+	margin-right: 15px;
 }
+
+.ui-datepicker {
+	background: #333;
+	border: 1px solid #555;
+	color: #EEE;
+	cursor: pointer;
+}
+
+input[name=travelType]{
+	margin-bottom: 15px;
+	margin-right: 15px;
+}
+
+label{
+	float: left;
+}
+
+
+.tripbox{
+	border: 4px solid white;
+	padding: 10px;
+}
+
+.disabled{
+	border: 4px solid white;
+}	

@@ -1,9 +1,8 @@
 function trip(){
 	
-	
-	this.myMethod = function() {
-		return "Hola";
-	};
+	this.step = 1;
+
+
 
 	this.setBegin = function(begin) {
 		this.begin = begin;
@@ -13,4 +12,19 @@ function trip(){
 		this.end = end;
 	};
 
+	this.getBegin = function() {
+		return this.begin;
+	};
+
+	this.getEnd = function() {
+		return this.end;
+	};
+
+	this.nextStep = function() {
+		this.step++;
+	};
+
+	this.getStep = function() {
+		return this.step;
+	};	
 }

@@ -12,26 +12,68 @@
     </head>
     
     <body>	
+      Thanks to [Airports2.json]
+      <div id="step1" class="span5 offset6 tripbox">
 
-      <div id="returnTrip" class="span5 offset6" style="border: 3px solid white; padding: 10px;">
-        <input type="radio" name="travelType" id="radioReturn">Return trip<br>
-        <input type="radio" name="travelType" id="radioOne">One way<br />
+        <header id="headerTitle">
+          <h3>Step title</h3>
+        </header>
 
-        <input type="text" id="dpReturn">
-        <input type="text" id="dpWay">
+        <label for="radioReturn">Return trip
+          <input type="radio" name="travelType" id="radioReturn"></label>
 
-
-        <br />
-        <button id="prev">Prev</button>
-        <button id="next">Next</button>
-
-      </div>
+          <label for="radioOne">One way
+            <input type="radio" name="travelType" id="radioOne"></label><br />
 
 
-      <!-- Use jquery and jquery UI to apply effects   -->
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
-      <script src="js/trip.js"></script>
-      <script src="js/effects.js"></script>
-    </body>
-    </html>
+            <br />
+            <input type="text" id="dpOneWay" required><br />
+            <input type="text" id="dpReturn" required>
+
+            <br />
+            <button id="prev">Prev</button>
+            <button id="next">Next</button>
+
+
+            <div id="airports">
+
+
+              <!-- <input type='text' id='name'> -->
+              <input id='name'>
+
+              <!-- <button id="search">Search</button> -->
+              <div id="results">
+
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+          <div id="step2" class="span5 offset6 tripbox">
+
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+
+          <!-- Use jquery and jquery UI to apply effects   -->
+          <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script -->
+          <!--script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script -->
+          <script src="js/jquery-1.10.2.min.js"></script>
+          <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+          <script src="js/trip.js"></script>
+          <script src="js/effects.js"></script>
+        </body>
+        </html>
