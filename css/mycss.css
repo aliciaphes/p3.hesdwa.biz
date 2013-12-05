@@ -13,10 +13,16 @@ body{
 }
 
 
-/*div[id^="step"]{
-	display: none;
-}*/
+button[id^=next], button[id^=prev]{
+	margin: 15px 15px 0 0;
+}
 
+
+.blockkkkk{
+	display: inline-block;
+	/*vertical-align:middle;*/
+	/*float: left;*/
+}
 
 
 .ui-datepicker {

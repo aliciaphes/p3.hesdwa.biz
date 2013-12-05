@@ -2,6 +2,12 @@ $( document ).ready(function() {
 	//var myTrip = new trip();
 
 
+var devices = new Array("Phone", "Tablet", "Computer");
+
+
+
+
+
 	function showStep(index){
 
 		//console.log("Step = " + index);
@@ -11,8 +17,10 @@ $( document ).ready(function() {
 
 		$("#step" + index + " .buttons")
 		.empty() //clear button area and then insert:
-		.append("<button class='nav' id='prev"+index+"'>Prev</button>")
-		.append("<button class='nav' id='next"+index+"'>Next</button>");
+		.append("<button id='prev"+index+"'>Prev</button>")
+		.append("<button id='next"+index+"'>Next</button>");
+
+		$("#step" + index + " button").addClass("btn");
 
 		//find the header an give it the title
 		$("#step" + index).find("header h3").html(myTrip.getTitle(index));
@@ -30,13 +38,13 @@ $( document ).ready(function() {
 	};
 
 
+	
+showStep(myTrip.getStep()); //first call to initialize
 
-	showStep(myTrip.getStep()); //first call to initialize
 
 
 //Actions to perform when clicking on 'Next'
-//$(".nav").on('click', function() { //$('#next' + myTrip.step)
-$(document).on('click', 'button[id^="next"]', function() {
+	$(document).on('click', 'button[id^="next"]', function() { //$('#next' + myTrip.step)
 
 	//alert("button clicked");
 	myTrip.nextStep();
@@ -62,7 +70,8 @@ $(document).on('click', 'button[id^="prev"]', function() {
 //Actions to perform when clicking on 'Return trip'
 $('#radioReturn').click(function() {
 
-	$('#dpReturn').val('').show().removeAttr('disabled').datepicker({
+	$('#dpReturn').val('').show().removeAttr('disabled')
+	.datepicker({
 		changeMonth: true,
 		changeYear: true,
 		onSelect: function(){ 
@@ -86,7 +95,9 @@ $('#radioReturn').click(function() {
 //Actions to perform when clicking on 'One way'
 $('#radioOne').click(function() {
 
-		$('#dpReturn').val('').prop("disabled", true); //disable editing
+		$('#dpReturn').val('') //.hide()
+		.prop("disabled", true) //disable editing
+		;
 		$('#dpOneWay').val('').show().datepicker({
 			changeMonth: true,
 			changeYear: true

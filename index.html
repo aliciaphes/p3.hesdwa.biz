@@ -7,7 +7,7 @@
 
       <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
       <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
-      <link rel="stylesheet" href="css/mycss.css">
+      <link rel="stylesheet" href="css/myCss.css">
 
     </head>
     
@@ -16,6 +16,7 @@
 
       <div class="container-fluid">
 
+        <!-- STEP ONE -->
         <div class="row-fluid">
 
           Thanks to [Airports2.json] 
@@ -34,8 +35,8 @@
 
 
                 <br />
-                <input type="text" id="dpOneWay" required><br />
-                <input type="text" id="dpReturn" required>
+                <input type="text" id="dpOneWay" placeholder="Departure date" required><br />
+                <input type="text" id="dpReturn" placeholder="Returning date" required>
 
                 <br />
 
@@ -61,13 +62,26 @@
 
             </div>
 
-
+            <!-- STEP TWO -->
             <div class="row-fluid">
-              <div id="step1" class="span5 offset5 tripbox">
+              <div id="step1" class="span6 offset5 tripbox">
                 <header>
                   <h3>Title goes here</h3>
                 </header>
 
+                <div id="passengers">
+
+                  <input type="text" class="block" placeholder="First name" required>
+                  <input type="text" class="block" placeholder="Last name" required>
+
+                  <button class="block">+</button>
+
+                  <input type="text" class="block" placeholder="First name" required>
+                  <input type="text" class="block" placeholder="Last name" required>
+
+                  <button class="block">+</button>                  
+
+                </div>
 
                 <div class="buttons">
                   <!-- <buttons prev and nav will be inserted here -->
@@ -75,11 +89,12 @@
               </div>
             </div>
 
-
+            <!-- STEP THREE -->
             <div class="row-fluid">
               <div id="step2" class="span5 offset5 tripbox">
                 <header>
                   <h3>Title goes here</h3>
+
                 </header>
 
                 <div class="buttons">
@@ -88,7 +103,7 @@
               </div>
             </div>
 
-
+            <!-- STEP FOUR -->
             <div class="row-fluid">
               <div id="step3" class="span5 offset5 tripbox">
                 <header>
