@@ -1,16 +1,21 @@
 $( document ).ready(function() {
-
-	var myTrip = new trip();
-
+	//var myTrip = new trip();
 
 
+	function showStep(index){
 
-	var showStep = function(index){
-
-		console.log("alipe step="+index);
+		//console.log("Step = " + index);
 
 		//show current step and hide the rest:
-		$("#step"+index).show().append("<button id='prev"+index+"'>Prev</button><button id='next"+index+"'>Next</button>");
+		$("#step" + index).show();
+
+		$("#step" + index + " .buttons")
+		.empty() //clear button area and then insert:
+		.append("<button class='nav' id='prev"+index+"'>Prev</button>")
+		.append("<button class='nav' id='next"+index+"'>Next</button>");
+
+		//find the header an give it the title
+		$("#step" + index).find("header h3").html(myTrip.getTitle(index));
 
 		var n = myTrip.stepTitles.length;
 		for(var i=0; i < n; i++){
@@ -27,6 +32,29 @@ $( document ).ready(function() {
 
 
 	showStep(myTrip.getStep()); //first call to initialize
+
+
+//Actions to perform when clicking on 'Next'
+//$(".nav").on('click', function() { //$('#next' + myTrip.step)
+$(document).on('click', 'button[id^="next"]', function() {
+
+	//alert("button clicked");
+	myTrip.nextStep();
+	showStep(myTrip.getStep());
+
+});
+
+
+
+//Actions to perform when clicking on 'Prev'
+$(document).on('click', 'button[id^="prev"]', function() {
+
+	//alert("button clicked");
+	myTrip.prevStep();
+	showStep(myTrip.getStep());
+
+});
+
 
 
 
@@ -65,15 +93,6 @@ $('#radioOne').click(function() {
 		});
 	});
 
-
-
-//Actions to perform when clicking on 'Next'
-$('#next'+myTrip.getStep()).click(function() {
-
-	myTrip.nextStep();
-	showStep(myTrip.getStep());
-
-});
 
 
 

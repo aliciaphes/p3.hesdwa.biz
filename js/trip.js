@@ -1,31 +1,40 @@
-function trip(){
+var myTrip = {
 	
-	this.step = 0;
-	this.stepTitles = ["Select dates", "Passengers", "Extras", "Summary"];
+	step: 0,
+
+	stepTitles: ["Select dates", "Passengers", "Extras", "Summary"],
 
 
 
-	this.setBegin = function(begin) {
+	setBegin: function(begin) {
 		this.begin = begin;
-	};
+	},
 
-	this.setEnd = function(end) {
+	setEnd: function(end) {
 		this.end = end;
-	};
+	},
 
-	this.getBegin = function() {
+	getBegin: function() {
 		return this.begin;
-	};
+	},
 
-	this.getEnd = function() {
+	getEnd: function() {
 		return this.end;
-	};
+	},
 
-	this.nextStep = function() {
+	nextStep: function() {
 		this.step++;
-	};
+	},
 
-	this.getStep = function() {
+	prevStep: function() {
+		this.step--;
+	},	
+
+	getStep: function() {
 		return this.step;
-	};	
+	},
+
+	getTitle: function(index) {
+		return this.stepTitles[index];
+	}	
 }
