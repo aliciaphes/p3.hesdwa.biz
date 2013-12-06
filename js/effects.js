@@ -30,6 +30,7 @@ $( document ).ready(function() {
 
 		//show current step and hide the rest:
 		$("#step" + index).show();
+		$(".errors").addClass("hidden");
 
 		$("#step" + index + " .buttons")
 		.empty() //clear button area and then insert:
@@ -63,34 +64,61 @@ showStep(myTrip.getStep()); //first call to initialize
 
 //Actions to perform when clicking on 'Next'
 	$(document).on('click', 'button[id^="next"]', function() { //$('#next' + myTrip.step)
- 
- var currentStep = myTrip.getStep();
 
 
+		var currentStep = myTrip.getStep();
 
-//verify errors:
 
-//if date fields are showing
-if($('#dpOneWay').is(':visible') || $('#dpReturn').is(':visible')){
+		$('#retError').empty();
+		$('#depError').empty();
+		$(".errors").addClass("hidden");
 
-var checkedValue = $("#step" + currentStep + " input[type='radio']:checked").attr('id');
-console.log("ali: "+checkedValue);
+		//verify errors:
 
+		//if date fields are showing
+		if($('#dpOneWay').is(':visible') || $('#dpReturn').is(':visible')){
+
+			var checkedValue = $("#step" + currentStep + " input[type='radio']:checked").attr('id');
+
+			//store values:
+			myTrip.departureDate = $('#dpOneWay').datepicker('getDate');
+			myTrip.returningDate = $('#dpReturn').datepicker('getDate');
+
+			//console.log("salida: "+myTrip.departureDate);
+			//console.log("llegada: "+myTrip.returningDate);
+
+			//make sure the dates are not blank
+
+			//console.log("departureDate "+myTrip.departureDate);
+			if(myTrip.departureDate == null){
+				$(".errors").removeClass("hidden");
+				$('#depError').html('<strong>Departure date cannot be empty</strong>');
+				
+			}
+
+
+			//compare dates in case of a return trip
+			if(checkedValue == 'radioReturn' && myTrip.returningDate == null){
+
+				$(".errors").removeClass("hidden");
+				$('#retError').html('<strong>Returning date cannot be empty</strong>');
+				
+			}
+
+//determine if it's allowed to go to the next step:
+//empty message area means values are correct
+if( $('#depError').html() == '' && $('#retError').html() == ''){
+	myTrip.nextStep();
+	showStep(myTrip.getStep());
+	//console.log(passengerList);	
 }
 
 
 
-//if everything is correct:
 
-//store dates
+}
 
-//go to next step:
-		myTrip.nextStep();
-		showStep(myTrip.getStep());
-
-		//console.log(passengerList);
-
-	});
+});
 
 
 
@@ -111,7 +139,10 @@ $(document).on('click', 'button[id^="prev"]', function() {
 //Actions to perform when clicking on 'Return trip'
 $('#radioReturn').click(function() {
 
-	$('#dpReturn').val('').show().removeAttr('disabled')
+	$('#dpReturn')
+	//.val('')
+	.show()
+	.removeAttr('disabled')
 	.datepicker({
 		changeMonth: true,
 		changeYear: true,
@@ -126,7 +157,10 @@ $('#radioReturn').click(function() {
 	});
 
 
-	$('#dpOneWay').val('').show().datepicker({
+	$('#dpOneWay')
+	//.val('')
+	.show()
+	.datepicker({
 		changeMonth: true,
 		changeYear: true
 	});
@@ -136,10 +170,14 @@ $('#radioReturn').click(function() {
 //Actions to perform when clicking on 'One way'
 $('#radioOne').click(function() {
 
-		$('#dpReturn').val('') //.hide()
-		.prop("disabled", true) //disable editing
-		.attr('placeholder','No returning date');;
-		$('#dpOneWay').val('').show().datepicker({
+	$('#dpReturn')
+			.val('') //.hide()
+			.prop("disabled", true) //disable editing
+			.attr('placeholder','No returning date');
+
+			$('#dpOneWay')
+		//.val('')
+		.show().datepicker({
 			changeMonth: true,
 			changeYear: true
 		});
