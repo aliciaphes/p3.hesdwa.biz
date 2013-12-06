@@ -1,27 +1,27 @@
 $( document ).ready(function() {
 	//var myTrip = new trip();
 
-	function actionsForStep(index){
+	function displayPassengerList(index){
 
-		switch(parseInt(index)){
-			case 1:
+		//switch(parseInt(index)){
+			//case 1:
 
-//clear list to regenerate
-$("#passengers").empty(); 
-			//$("#step" + index).find('div[id="passengers"]').empty();
-			//$("#passengers").children().remove();
-			//$("#passengers").html('');
+				//clear list to regenerate
+				$("#passengers").empty(); 
+				//$("#step" + index).find('div[id="passengers"]').empty();
+				//$("#passengers").children().remove();
+				//$("#passengers").html('');
 
-			//render passengers and add/remove button
-			for(var i=0 ; i<myTrip.passengerList.length ; i++){
+				//render passengers and add/remove button
+				for(var i=0 ; i<myTrip.passengerList.length ; i++){
 
-				$("#passengers")
-				.append("<input type='text' maxlength='35' value=" + myTrip.passengerList[i] +">")
-				.append("<button class=' save btn'>Save</button>")
-				.append("<button class=' rem btn-danger'>Delete</button><br/>");
-			}
-			break;
-		}
+					$("#passengers")
+					.append("<input type='text' maxlength='35' value=" + myTrip.passengerList[i] +">")
+					.append("<button class=' save btn'>Save</button>")
+					.append("<button class=' rem btn-danger'>Delete</button><br/>");
+				}
+				//break;
+		//}
 	}
 
 	function showStep(index){
@@ -47,11 +47,11 @@ $("#passengers").empty();
 				$("#step"+i).hide();
 			if(i == 0) //if first step, hide 'prev' button
 				$("#prev"+i).hide();
+			if(i == 1)
+				displayPassengerList(index);
 			if(i == n-1) //if last step, hide 'next' button
 				$("#next"+i).hide();
 		}
-
-		actionsForStep(index);
 
 	};
 
@@ -63,7 +63,28 @@ showStep(myTrip.getStep()); //first call to initialize
 
 //Actions to perform when clicking on 'Next'
 	$(document).on('click', 'button[id^="next"]', function() { //$('#next' + myTrip.step)
+ 
+ var currentStep = myTrip.getStep();
 
+
+
+//verify errors:
+
+//if date fields are showing
+if($('#dpOneWay').is(':visible') || $('#dpReturn').is(':visible')){
+
+var checkedValue = $("#step" + currentStep + " input[type='radio']:checked").attr('id');
+console.log("ali: "+checkedValue);
+
+}
+
+
+
+//if everything is correct:
+
+//store dates
+
+//go to next step:
 		myTrip.nextStep();
 		showStep(myTrip.getStep());
 
@@ -169,7 +190,7 @@ $(document).on('click', '.rem', function() {
 				myTrip.passengerList.splice(rowIndex, 1);
 				console.log(myTrip.passengerList);
 
-				actionsForStep(myTrip.getStep());
+				displayPassengerList(myTrip.getStep());
 				
 //hide element
 }
