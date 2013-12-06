@@ -2,8 +2,13 @@ var myTrip = {
 	
 	step: 0,
 
-	stepTitles: ["Select dates", "Passengers", "Extras", "Summary"],
+	stepTitles: ["Select dates", "Passengers", "Summary"],
 
+	departureDate: 0,
+	returningDate: 0,
+
+	//var passengerList = ["First name"];
+	passengerList: [],
 
 
 	setBegin: function(begin) {

@@ -5,9 +5,11 @@
 
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
 
-      <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
-      <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
-      <link rel="stylesheet" href="css/myCss.css">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
+      <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.3.custom.min.css">
+      <!-- <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Montserrat"> -->
+      <link rel="stylesheet" type="text/css" href="css/myCss.css">
 
     </head>
     
@@ -16,10 +18,15 @@
 
       <div class="container-fluid">
 
+
         <!-- STEP ONE -->
         <div class="row-fluid">
 
-          Thanks to [Airports2.json] 
+          <div class="span5 tripbox">
+            <p>In this project I am simulating an application where a trip can be specified and later a small summary will be shown.</p>
+
+            <p>Thanks to [Airports2.json]</p>
+          </div>          
 
           <div id="step0" class="span5 offset5 tripbox">
 
@@ -35,18 +42,18 @@
 
 
                 <br />
-                <input type="text" id="dpOneWay" placeholder="Departure date" required><br />
-                <input type="text" id="dpReturn" placeholder="Returning date" required>
+                <input type="text" id="dpOneWay" placeholder="Departure date"><br />
+                <input type="text" id="dpReturn" placeholder="Returning date">
 
                 <br />
 
                 <div id="airports">
 
-
+                  Origin:
                   <!-- <input type='text' id='name'> -->
                   <input id='name'>
-
-                  <!-- <button id="search">Search</button> -->
+                  <br/>
+                  Falta otro autocompleter
                   <div id="results">
 
                   </div>
@@ -64,27 +71,21 @@
 
             <!-- STEP TWO -->
             <div class="row-fluid">
-              <div id="step1" class="span6 offset5 tripbox">
+              <div id="step1" class="span5 offset5 tripbox">
                 <header>
                   <h3>Title goes here</h3>
                 </header>
 
+                <!-- <div> -->
+                <button class="add">+</button><br/>
+                <!-- </div> -->
+
                 <div id="passengers">
-
-                  <input type="text" class="block" placeholder="First name" required>
-                  <input type="text" class="block" placeholder="Last name" required>
-
-                  <button class="block">+</button>
-
-                  <input type="text" class="block" placeholder="First name" required>
-                  <input type="text" class="block" placeholder="Last name" required>
-
-                  <button class="block">+</button>                  
-
+                  <!-- List of passengers will be inserted here -->
                 </div>
 
                 <div class="buttons">
-                  <!-- <buttons prev and nav will be inserted here -->
+                  <!-- Buttons prev and nav will be inserted here -->
                 </div>                
               </div>
             </div>
@@ -102,22 +103,6 @@
                 </div>                
               </div>
             </div>
-
-            <!-- STEP FOUR -->
-            <div class="row-fluid">
-              <div id="step3" class="span5 offset5 tripbox">
-                <header>
-                  <h3>Title goes here</h3>
-                </header>
-
-
-                <div class="buttons">
-                  <!-- <buttons prev and nav will be inserted here -->
-                </div>                
-              </div>
-            </div>
-
-
 
           </div>
 

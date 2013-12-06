@@ -2,7 +2,7 @@ body{
 	background-image: url("../img/plane.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-family: Helvetica, sans-serif;
+	font-family: 'Montserrat', Helvetica, sans-serif;
 	color: white;
 }
 
@@ -18,12 +18,21 @@ button[id^=next], button[id^=prev]{
 }
 
 
-.blockkkkk{
+.add{
+	margin-right: 5px;
+	margin-left: 5px;
+}
+
+
+.blockkk{
 	display: inline-block;
 	/*vertical-align:middle;*/
 	/*float: left;*/
 }
 
+.ui-helper-hidden-accessible {
+	display:none;
+}
 
 .ui-datepicker {
 	background: #333;

@@ -1,12 +1,28 @@
 $( document ).ready(function() {
 	//var myTrip = new trip();
 
+	function actionsForStep(index){
 
-var devices = new Array("Phone", "Tablet", "Computer");
+		switch(parseInt(index)){
+			case 1:
 
+//clear list to regenerate
+$("#passengers").empty(); 
+			//$("#step" + index).find('div[id="passengers"]').empty();
+			//$("#passengers").children().remove();
+			//$("#passengers").html('');
 
+			//render passengers and add/remove button
+			for(var i=0 ; i<myTrip.passengerList.length ; i++){
 
-
+				$("#passengers")
+				.append("<input type='text' maxlength='35' value=" + myTrip.passengerList[i] +">")
+				.append("<button class=' save btn'>Save</button>")
+				.append("<button class=' rem btn-danger'>Delete</button><br/>");
+			}
+			break;
+		}
+	}
 
 	function showStep(index){
 
@@ -22,7 +38,7 @@ var devices = new Array("Phone", "Tablet", "Computer");
 
 		$("#step" + index + " button").addClass("btn");
 
-		//find the header an give it the title
+		//find the header and give it the title
 		$("#step" + index).find("header h3").html(myTrip.getTitle(index));
 
 		var n = myTrip.stepTitles.length;
@@ -35,6 +51,8 @@ var devices = new Array("Phone", "Tablet", "Computer");
 				$("#next"+i).hide();
 		}
 
+		actionsForStep(index);
+
 	};
 
 
@@ -46,20 +64,22 @@ showStep(myTrip.getStep()); //first call to initialize
 //Actions to perform when clicking on 'Next'
 	$(document).on('click', 'button[id^="next"]', function() { //$('#next' + myTrip.step)
 
-	//alert("button clicked");
-	myTrip.nextStep();
-	showStep(myTrip.getStep());
+		myTrip.nextStep();
+		showStep(myTrip.getStep());
 
-});
+		//console.log(passengerList);
+
+	});
 
 
 
 //Actions to perform when clicking on 'Prev'
 $(document).on('click', 'button[id^="prev"]', function() {
 
-	//alert("button clicked");
 	myTrip.prevStep();
 	showStep(myTrip.getStep());
+
+	//console.log(passengerList);
 
 });
 
@@ -97,12 +117,91 @@ $('#radioOne').click(function() {
 
 		$('#dpReturn').val('') //.hide()
 		.prop("disabled", true) //disable editing
-		;
+		.attr('placeholder','No returning date');;
 		$('#dpOneWay').val('').show().datepicker({
 			changeMonth: true,
 			changeYear: true
 		});
 	});
+
+
+
+
+$(document).on('click', '.save', function() {
+
+	var prevElement = $(this).prev();
+
+	if($(this).text() == 'Save'){
+		
+		var newVal = prevElement.val();
+
+		myTrip.passengerList.push(newVal);
+
+		console.log(myTrip.passengerList);
+		
+		prevElement.prop("disabled", true);
+		$(this).text('Edit');
+
+	}
+	else{
+		prevElement.removeAttr('disabled');
+		$(this).text('Save');	
+	}
+
+
+});
+
+
+
+
+
+
+$(document).on('click', '.rem', function() {
+
+	if (confirm("Are you sure you want to delete this element?")){
+
+				//retrieve row number of clicked element
+				var rowIndex = $(this).prevAll("input:first").index();
+				rowIndex /= 4;
+				//console.log(rowIndex);
+
+				//remove from list
+				myTrip.passengerList.splice(rowIndex, 1);
+				console.log(myTrip.passengerList);
+
+				actionsForStep(myTrip.getStep());
+				
+//hide element
+}
+
+
+});
+
+
+
+
+
+
+//Actions to perform when clicking on 'Add passenger'	
+$(document).on('click', '.add', function() {	
+
+//before adding a new passenger entry data, we store the entered value
+
+var name = $("#passengers input:last").val();
+console.log(name);
+
+//console.log("adding "+name);
+
+
+	//$(this).parent()
+	$("#passengers")
+	.append("<input type='text' placeholder='First and last name' maxlength='35'>")
+	.append("<button class='btn save'>Save</button>")
+	.append("<button class='btn-danger rem'>Delete</button><br/>");
+
+	console.log(myTrip.passengerList);
+
+});
 
 
 
