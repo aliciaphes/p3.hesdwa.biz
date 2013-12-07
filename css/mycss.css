@@ -63,7 +63,9 @@ button[id^=next], button[id^=prev], .errors{
   display:inline-block;
 }
 
-
+a:link, a:visited, a:hover, a:active {
+color: white;
+}
 
 input[name="travelType"]{
 	margin-bottom: 15px;

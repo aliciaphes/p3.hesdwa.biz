@@ -345,7 +345,7 @@ $('.airport').autocomplete({
 
 		$.ajax({
 			dataType: "JSON",
-			url: "data/airports2.json",
+			url: "data/airports.json",
 			minLength: 3,
 			success: function(results){
 				//filter:
