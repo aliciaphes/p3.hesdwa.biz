@@ -4,27 +4,27 @@ var myTrip = {
 
 	stepTitles: ["Select dates", "Passengers", "Summary"],
 
-	departureDate: 0,
+	departureDate: new Date(),
 	returningDate: 0,
 
 	//var passengerList = ["First name"];
 	passengerList: [],
 
 
-	setBegin: function(begin) {
-		this.begin = begin;
+	setDepartureDate: function(begin) {
+		this.departureDate = begin;
 	},
 
-	setEnd: function(end) {
-		this.end = end;
+	setReturningDate: function(end) {
+		this.returningDate = end;
 	},
 
-	getBegin: function() {
-		return this.begin;
+	getDepartureDate: function() {
+		return this.departureDate;
 	},
 
-	getEnd: function() {
-		return this.end;
+	getReturningDate: function() {
+		return this.returningDate;
 	},
 
 	nextStep: function() {
@@ -41,5 +41,9 @@ var myTrip = {
 
 	getTitle: function(index) {
 		return this.stepTitles[index];
-	}	
+	},
+
+	getPassenger: function(index) {
+		return this.passengerList[index];
+	}
 }

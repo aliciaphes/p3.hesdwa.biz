@@ -16,7 +16,7 @@ $( document ).ready(function() {
 				for(var i=0 ; i<myTrip.passengerList.length ; i++){
 
 					$("#passengers")
-					.append("<input type='text' maxlength='35' value=" + myTrip.passengerList[i] +">")
+					.append("<input type='text' maxlength='35' value=" + myTrip.getPassenger(i) +">")
 					.append("<button class=' save btn'>Save</button>")
 					.append("<button class=' rem btn-danger'>Delete</button><br/>");
 				}
@@ -24,9 +24,44 @@ $( document ).ready(function() {
 		//}
 	}
 
-	function showStep(index){
+	function showSummary(){
 
-		//console.log("Step = " + index);
+
+		var typeOfTrip = $("label[for='" + $("#step0 input[type='radio']:checked").attr('id') + "']").text();
+
+		$("#tripType").val(typeOfTrip);
+
+
+		$("#depDate").val(myTrip.getDepartureDate());
+
+		if(typeOfTrip == "Return trip"){
+			$("#returningDate").val(myTrip.getReturningDate());
+		}
+		else{
+			$('label[for="returningDate"]').hide();
+			$("#returningDate").hide();
+		}
+
+		$("#from").val($("#origin").val());
+		$("#to").val($("#destination").val());
+
+
+		console.log(myTrip.passengerList);
+
+		$("#passList").empty(); //refresh list
+		
+		for(var i=0; i<myTrip.passengerList.length; i++){
+			$("#passList").append("<label for='pass"+i+"'>Passenger "+(i+1)+":<input type='text' id='pass"+i+"' readonly></label>");
+			$("#pass"+i).val(myTrip.getPassenger(i));
+
+		}
+
+
+
+
+	}	
+
+	function showStep(index){
 
 		//show current step and hide the rest:
 		$("#step" + index).show();
@@ -50,75 +85,100 @@ $( document ).ready(function() {
 				$("#prev"+i).hide();
 			if(i == 1)
 				displayPassengerList(index);
-			if(i == n-1) //if last step, hide 'next' button
+			if(i == n-1){ //if last step, hide 'next' button
 				$("#next"+i).hide();
-		}
+				showSummary();
+			}
+	}
 
-	};
+};
 
-
-	
-showStep(myTrip.getStep()); //first call to initialize
 
 
 
 //Actions to perform when clicking on 'Next'
-	$(document).on('click', 'button[id^="next"]', function() { //$('#next' + myTrip.step)
+$(document).on('click', 'button[id^="next"]', function() {
+	//verify errors before anything else:
+
+	var currentStep = myTrip.getStep();
 
 
-		var currentStep = myTrip.getStep();
+	$('#retError').empty();
+	$('#depError').empty();
+	$('#specificError').empty();
 
-
-		$('#retError').empty();
-		$('#depError').empty();
-		$(".errors").addClass("hidden");
-
-		//verify errors:
-
-		//if date fields are showing
-		if($('#dpOneWay').is(':visible') || $('#dpReturn').is(':visible')){
+	if(currentStep == 0){
+		if($('#dpOneWay').is(':visible') || $('#dpReturn').is(':visible')){//if date fields are showing
 
 			var checkedValue = $("#step" + currentStep + " input[type='radio']:checked").attr('id');
 
 			//store values:
-			myTrip.departureDate = $('#dpOneWay').datepicker('getDate');
-			myTrip.returningDate = $('#dpReturn').datepicker('getDate');
+			myTrip.setDepartureDate($('#dpOneWay').datepicker('getDate'));
+			myTrip.setReturningDate($('#dpReturn').datepicker('getDate'));
 
-			//console.log("salida: "+myTrip.departureDate);
-			//console.log("llegada: "+myTrip.returningDate);
-
-			//make sure the dates are not blank
-
-			//console.log("departureDate "+myTrip.departureDate);
-			if(myTrip.departureDate == null){
+			//check departure date
+			if(myTrip.getDepartureDate() == null){
 				$(".errors").removeClass("hidden");
 				$('#depError').html('<strong>Departure date cannot be empty</strong>');
 				
 			}
 
-
-			//compare dates in case of a return trip
-			if(checkedValue == 'radioReturn' && myTrip.returningDate == null){
-
+			//check returning date in case of a return trip
+			if(checkedValue == 'radioReturn' && myTrip.getReturningDate() == null){
 				$(".errors").removeClass("hidden");
 				$('#retError').html('<strong>Returning date cannot be empty</strong>');
-				
 			}
 
-//determine if it's allowed to go to the next step:
-//empty message area means values are correct
-if( $('#depError').html() == '' && $('#retError').html() == ''){
-	myTrip.nextStep();
-	showStep(myTrip.getStep());
-	//console.log(passengerList);	
-}
+			//determine if it's allowed to go to the next step:
+			//empty message area means values are correct
+			if( $('#depError').html() == ''
+				&& $('#retError').html() == ''
+			 //&& $('#specificError').html() == ''
+			 ){
+
+				//show error if departure > return (only in the case of a return trip)
+			if(checkedValue == 'radioReturn'){
+				if( !(myTrip.getDepartureDate() < myTrip.getReturningDate()) ){
+					$(".errors").removeClass("hidden");
+					$('.specificError').html("<strong>Returning date cannot be before or on departure date</strong>");
+
+				}
+				else{
+					myTrip.nextStep();
+					showStep(myTrip.getStep());
+				}					
+			}
+			else{
+				myTrip.nextStep();
+				showStep(myTrip.getStep());
+					//console.log(passengerList);	
+				}
+
+			}//if error area is clean
+		}//if date fields are showing
+		else{
+			$(".errors").removeClass("hidden")
+			$('.specificError').html("<strong>Please make a selection</strong>");	
+		}
+	}	
 
 
 
+	if(currentStep == 1){
 
-}
-
+		if(myTrip.passengerList.length == 0){
+			$(".errors").removeClass("hidden")
+			$('.specificError').html("<strong>Please make a selection</strong>");
+		}
+		else{
+			myTrip.nextStep();
+			showStep(myTrip.getStep());			
+		}
+	}
 });
+
+
+
 
 
 
@@ -139,6 +199,9 @@ $(document).on('click', 'button[id^="prev"]', function() {
 //Actions to perform when clicking on 'Return trip'
 $('#radioReturn').click(function() {
 
+	$('.specificError').empty();
+	$(".errors").addClass("hidden");
+
 	$('#dpReturn')
 	//.val('')
 	.show()
@@ -149,9 +212,9 @@ $('#radioReturn').click(function() {
 		onSelect: function(){ 
 			var dateObject = $(this).datepicker('getDate');
 
-			myTrip.setBegin(dateObject);
-			var d = myTrip.getBegin().getDate();
-			console.log(d);
+			myTrip.setDepartureDate(dateObject);
+			//var d = myTrip.getDepartureDate().getDate();
+			//console.log(d);
 		}
 
 	});
@@ -167,8 +230,16 @@ $('#radioReturn').click(function() {
 });
 
 
+
+
+
+
+
 //Actions to perform when clicking on 'One way'
 $('#radioOne').click(function() {
+
+	$('.specificError').empty();
+	$(".errors").addClass("hidden");
 
 	$('#dpReturn')
 			.val('') //.hide()
@@ -186,6 +257,9 @@ $('#radioOne').click(function() {
 
 
 
+
+
+
 $(document).on('click', '.save', function() {
 
 	var prevElement = $(this).prev();
@@ -196,7 +270,7 @@ $(document).on('click', '.save', function() {
 
 		myTrip.passengerList.push(newVal);
 
-		console.log(myTrip.passengerList);
+		//console.log(myTrip.passengerList);
 		
 		prevElement.prop("disabled", true);
 		$(this).text('Edit');
@@ -219,17 +293,17 @@ $(document).on('click', '.rem', function() {
 
 	if (confirm("Are you sure you want to delete this element?")){
 
-				//retrieve row number of clicked element
-				var rowIndex = $(this).prevAll("input:first").index();
-				rowIndex /= 4;
-				//console.log(rowIndex);
+		//retrieve row number of clicked element
+		var rowIndex = $(this).prevAll("input:first").index();
+		rowIndex /= 4;
+		//console.log(rowIndex);
 
-				//remove from list
-				myTrip.passengerList.splice(rowIndex, 1);
-				console.log(myTrip.passengerList);
+		//remove from list
+		myTrip.passengerList.splice(rowIndex, 1);
+		//console.log(myTrip.passengerList);
 
-				displayPassengerList(myTrip.getStep());
-				
+		displayPassengerList(myTrip.getStep());
+
 //hide element
 }
 
@@ -244,44 +318,39 @@ $(document).on('click', '.rem', function() {
 //Actions to perform when clicking on 'Add passenger'	
 $(document).on('click', '.add', function() {	
 
+	$('.specificError').empty();
+	$(".errors").addClass("hidden");
+
 //before adding a new passenger entry data, we store the entered value
 
 var name = $("#passengers input:last").val();
-console.log(name);
+	//console.log(name);
+	//console.log("adding "+name);
 
-//console.log("adding "+name);
-
-
-	//$(this).parent()
 	$("#passengers")
 	.append("<input type='text' placeholder='First and last name' maxlength='35'>")
 	.append("<button class='btn save'>Save</button>")
 	.append("<button class='btn-danger rem'>Delete</button><br/>");
 
-	console.log(myTrip.passengerList);
+	//console.log(myTrip.passengerList);
 
 });
 
 
 
 
-$('#name').autocomplete({
+$('.airport').autocomplete({
 
 	source: function(request, response) {
 
 		$.ajax({
 			dataType: "JSON",
 			url: "data/airports2.json",
-			// data: {
-			// 	name: $('#name').val(),
-			// },
 			minLength: 3,
 			success: function(results){
-				//console.log(request.term);
 				//filter:
 				var items = [];
 				$.each(results, function (index, value) {
-			        //console.log(value);
 			        //if(value.type == "airport" && status == 1){ //1=open airport
 			        	if(value.type == "Airports"
 			        		&& (value.name).toLowerCase().indexOf(request.term.toLowerCase()) >= 0){
@@ -289,18 +358,18 @@ $('#name').autocomplete({
 			        }    
 			    });//end each
 				
-				console.log(items);
+				//console.log(items);
 
 				//response(results);
-				//response(items); //este tira mas o menos
+				response(items); //este tira mas o menos
 
 
-				response( $.map( items, function( item ) {
-					return {
-						label: item.name,
-						value: item.name
-					}
-				}));
+				// response( $.map( items, function( item ) {
+				// 	return {
+				// 		label: item.name,
+				// 		value: item.name
+				// 	}
+				// }));
 
 
 
@@ -324,6 +393,6 @@ $('#name').autocomplete({
 
 
 
-
+showStep(myTrip.getStep()); //first call to initialize
 
 }); //end of file

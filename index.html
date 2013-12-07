@@ -19,11 +19,13 @@
       <div class="container-fluid">
 
 
-        <!-- STEP ONE -->
+        <!-- FIRST STEP: SELECT FLIGHT -->
         <div class="row-fluid">
 
           <div class="span5 tripbox">
             <p>In this project I am simulating an application where a trip can be specified and later a small summary will be shown.</p>
+
+            <p>We assume a return trip cannot happen on the same day.</p>
 
             <p>Thanks to [Airports2.json] for the airport codes and to ?????  for the background image</p>
           </div>          
@@ -38,98 +40,126 @@
               <input type="radio" name="travelType" id="radioReturn"></label>
 
               <label for="radioOne">One way
-                <input type="radio" name="travelType" id="radioOne"></label><br />
+                <input type="radio" name="travelType" id="radioOne"></label>
 
-
-                <br />
                 <input type="text" id="dpOneWay" placeholder="Departure date"><br />
                 <input type="text" id="dpReturn" placeholder="Returning date">
 
-                <br />
-
                 <div id="airports">
 
-                  Origin:
-                  <!-- <input type='text' id='name'> -->
-                  <input id='name'>
-                  <br/>
-                  <strong>Destination</strong>
-                  <div id="results">
 
+                  <label for="origin">Origin:
+                    <input id='origin' class="airport"></label>
+                    <br/>
+
+                    <label for="destination">Destination:
+                      <input id='destination' class="airport"></label>
+
+                      <div id="results">
+
+                      </div>
+                    </div>
+
+                    <div class="errors alert alert-danger">
+                      <!-- Error messages will be inserted here -->
+
+                      <div id="depError">
+                      </div>
+
+                      <div id="retError">
+                      </div>
+
+                      <div class="specificError">
+                      </div>
+                    </div>
+
+                    <div class="buttons">
+                      <!-- buttons prev and nav will be inserted here -->
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- SECOND STEP: SELECT PASSENGERS -->
+                <div class="row-fluid">
+                  <div id="step1" class="span5 offset5 tripbox">
+                    <header>
+                      <h3>Title goes here</h3>
+                    </header>
+
+                    <!-- <div> -->
+                    <button class="add">+</button><br/>
+                    <!-- </div> -->
+
+                    <div id="passengers">
+                      <!-- List of passengers will be inserted here -->
+                    </div>
+
+                    <div class="errors alert alert-danger">
+                      <!-- Error messages will be inserted here -->
+                      <div class="specificError">
+                      </div>
+                    </div>
+
+                    <div class="buttons">
+                      <!-- Buttons prev and nav will be inserted here -->
+                    </div>                
                   </div>
                 </div>
 
-                <div class="errors alert alert-danger">
-                  <!-- Error messages will be inserted here -->
+                <!-- THIRD STEP: SUMMARY -->
+                <div class="row-fluid">
+                  <div id="step2" class="span5 offset5 tripbox">
+                    <header>
+                      <h3>Title goes here</h3>
 
-                  <div id="depError">
-                  </div>
+                    </header>
+                    <div id="content">
 
-                  <div id="retError">
-                  </div>
+                      <label for="tripType">Trip type:
+                        <input type="text" id="tripType" readonly></label>
 
-                </div>
+                        <label for="depDate">Departure date:
+                          <input type="text" id="depDate" readonly></label>
 
-                <div class="buttons">
-                  <!-- buttons prev and nav will be inserted here -->
-                </div>
-              </div>
 
-            </div>
+                          <label for="returningDate">Returning date:
+                            <input type="text" id="returningDate" readonly></label>
 
-            <!-- STEP TWO -->
-            <div class="row-fluid">
-              <div id="step1" class="span5 offset5 tripbox">
-                <header>
-                  <h3>Title goes here</h3>
-                </header>
+                            <label for="from">From:
+                              <input type="text" id="from" readonly>
+                              <!-- <textarea id="from" disabled> -->
+                            </label>
 
-                <!-- <div> -->
-                <button class="add">+</button><br/>
-                <!-- </div> -->
+                            <label for="to">To:
+                              <input type="text" id="to" readonly>
+                            </label>
 
-                <div id="passengers">
-                  <!-- List of passengers will be inserted here -->
-                </div>
 
-                <div class="errors alert alert-danger">
-                  <!-- Error messages will be inserted here -->
-                  Error messages here
-                </div>
+                            <div id="passList">
+                              <!-- Passenger list goes here -->
+                            </div>
+                          </div>
 
-                <div class="buttons">
-                  <!-- Buttons prev and nav will be inserted here -->
-                </div>                
-              </div>
-            </div>
+                          <div class="buttons">
+                            <!-- buttons prev and nav will be inserted here -->
+                          </div>                
+                        </div>
+                      </div>
 
-            <!-- STEP THREE -->
-            <div class="row-fluid">
-              <div id="step2" class="span5 offset5 tripbox">
-                <header>
-                  <h3>Title goes here</h3>
-
-                </header>
-
-                <div class="buttons">
-                  <!-- <buttons prev and nav will be inserted here -->
-                </div>                
-              </div>
-            </div>
-
-          </div>
+                    </div>
 
 
 
 
 
 
-          <!-- Use jquery and jquery UI to apply effects   -->
-          <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script -->
-          <!--script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script -->
-          <script src="js/jquery-1.10.2.min.js"></script>
-          <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
-          <script src="js/trip.js"></script>
-          <script src="js/effects.js"></script>
-        </body>
-        </html>
+                    <!-- Use jquery and jquery UI to apply effects   -->
+                    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script -->
+                    <!--script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script -->
+                    <script src="js/jquery-1.10.2.min.js"></script>
+                    <script src="js/jquery-ui-1.10.3.custom.min.js"></script>
+                    <script src="js/trip.js"></script>
+                    <script src="js/effects.js"></script>
+                  </body>
+                  </html>

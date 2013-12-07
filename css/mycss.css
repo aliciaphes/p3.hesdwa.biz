@@ -6,6 +6,22 @@ body{
 	color: white;
 }
 
+
+.ui-datepicker {
+	background: #333;
+	border: 1px solid #555;
+	color: #EEE;
+	cursor: pointer;
+}
+.ui-helper-hidden-accessible {
+	display:none;
+}
+
+.tripbox{
+	border: 3px solid white;
+	padding: 12px;
+}
+
 #dpReturn, #dpOneWay{
 	display: none;
 	margin-top: 15px;
@@ -17,9 +33,12 @@ body{
 	display: none;
 }
 
+
+
 button[id^=next], button[id^=prev], .errors{
 	margin: 15px 15px 0 0;
 }
+
 
 
 .add{
@@ -28,36 +47,26 @@ button[id^=next], button[id^=prev], .errors{
 }
 
 
-.blockkk{
-	display: inline-block;
-	/*vertical-align:middle;*/
+
+#tripType, #depDate, #returningDate, #from, #to, #origin, #destination{
 	/*float: left;*/
 }
 
-.ui-helper-hidden-accessible {
-	display:none;
+
+#origin label, #origin input,
+#destination label, #destination input,
+#tripType label, #tripType input,
+#depDate label, #depDate input,
+#returningDate label, #returningDate input,
+#from label, #from input,
+#to label, #to input{
+  display:inline-block;
 }
 
-.ui-datepicker {
-	background: #333;
-	border: 1px solid #555;
-	color: #EEE;
-	cursor: pointer;
-}
 
 
 input[name="travelType"]{
 	margin-bottom: 15px;
 	margin-right: 15px;
-}
-
-label{
-	float: left;
-}
-
-
-.tripbox{
-	border: 3px solid white;
-	padding: 12px;
 }
 
