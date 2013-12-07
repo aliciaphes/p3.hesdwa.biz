@@ -1,3 +1,7 @@
+
+//In this file I simulate a class where I will be storing all the information related to the trip
+//getters, setters, and additional 'methods'
+
 var myTrip = {
 	
 	step: 0,
@@ -7,7 +11,6 @@ var myTrip = {
 	departureDate: new Date(),
 	returningDate: 0,
 
-	//var passengerList = ["First name"];
 	passengerList: [],
 
 

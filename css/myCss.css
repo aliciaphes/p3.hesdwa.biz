@@ -1,9 +1,12 @@
+*{
+	font-family: 'Montserrat', Helvetica, sans-serif;
+}
+
 body{
 	background-image: url("../img/plane.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
-	font-family: 'Montserrat', Helvetica, sans-serif;
-	color: white;
+	color: white;	
 }
 
 
@@ -42,16 +45,12 @@ button[id^=next], button[id^=prev], .errors{
 
 
 .add{
-	margin-right: 5px;
-	margin-left: 5px;
+	margin: 0 15px 15px 15px;
 }
 
-
-
-#tripType, #depDate, #returningDate, #from, #to, #origin, #destination{
-	/*float: left;*/
+.save, .rem{
+	margin: 0 10px 0 15px;
 }
-
 
 #origin label, #origin input,
 #destination label, #destination input,
@@ -59,12 +58,13 @@ button[id^=next], button[id^=prev], .errors{
 #depDate label, #depDate input,
 #returningDate label, #returningDate input,
 #from label, #from input,
-#to label, #to input{
-  display:inline-block;
+#to label, #to input,
+{
+	display:inline-block;
 }
 
 a:link, a:visited, a:hover, a:active {
-color: white;
+	color: white;
 }
 
 input[name="travelType"]{
